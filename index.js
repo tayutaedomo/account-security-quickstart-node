@@ -22,7 +22,8 @@ if(!config.API_KEY){
 /**
  * Setup MongoDB connection.
  */
-mongoose.connect('mongodb://localhost:27017/accountsecuritydemo');
+var mongodb_uri = process.env.MONGODB || 'mongodb://localhost:27017/accountsecuritydemo';
+mongoose.connect(mongodb_uri);
 var db = mongoose.connection;
 
 app.use(cookieParser());
