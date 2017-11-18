@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var expressSession = require('express-session');
 var mongoStore = require('connect-mongo')({session: expressSession});
+var Promise = require('bluebird');
 var mongoose = require('mongoose');
 
 var config = require('./server/config.js');
@@ -23,6 +24,7 @@ if(!config.API_KEY){
  * Setup MongoDB connection.
  */
 var mongodb_uri = process.env.MONGODB || 'mongodb://localhost:27017/accountsecuritydemo';
+mongoose.Promise = Promise;
 mongoose.connect(mongodb_uri);
 var db = mongoose.connection;
 
@@ -45,7 +47,7 @@ app.use(bodyParser.urlencoded({
 /**
  * Open the DB connection.
  */
-db.once('open', function (err) {
+db.once('openUri', function (err) {
     if(err){
         console.log("Error Opening the DB Connection: ", err);
         return;
