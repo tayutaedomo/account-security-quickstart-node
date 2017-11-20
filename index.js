@@ -47,7 +47,7 @@ app.use(bodyParser.urlencoded({
 /**
  * Open the DB connection.
  */
-db.once('openUri', function (err) {
+db.once('open', function (err) {
     if(err){
         console.log("Error Opening the DB Connection: ", err);
         return;

@@ -108,6 +108,7 @@ exports.register = function (req, res) {
                 }, function (err, regRes) {
                     if (err) {
                         console.log('Error Registering User with Account Security');
+                        console.log(err.stack);
                         res.status(500).json(err);
                         return;
                     }
